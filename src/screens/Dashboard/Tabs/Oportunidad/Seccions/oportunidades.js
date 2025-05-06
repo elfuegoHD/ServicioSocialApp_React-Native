@@ -1,0 +1,118 @@
+export const oportunidades = [
+    {
+      id: 1,
+      titulo: 'Asistente de Investigación',
+      institucion: 'Instituto Nacional de Investigación',
+      categoria: 'Ingeniería',
+      ubicacion: 'Ciudad de México',
+      modalidad: 'Presencial',
+      horario: 'Flexible, 20 hrs/semana',
+      fechaInicio: '1 de junio, 2023',
+      duracion: '6 meses',
+      plazas: 2,
+      descripcion:
+        'El Instituto Nacional de Investigación busca estudiantes de ingeniería para apoyar en proyectos de investigación en el área de materiales...',
+      requisitos: [
+        'Estudiante de Ingeniería (7º semestre en adelante)',
+        'Conocimientos básicos de ciencia de materiales',
+        'Disponibilidad de 20 horas semanales',
+        'Interés en la investigación científica',
+      ],
+      actividades: [
+        'Apoyo en la realización de experimentos',
+        'Recopilación y análisis de datos',
+        'Elaboración de reportes técnicos',
+        'Participación en reuniones de equipo',
+      ],
+      beneficios: [
+        'Carta de liberación de servicio social',
+        'Posibilidad de participar en publicaciones científicas',
+        'Capacitación en técnicas de laboratorio',
+        'Ambiente de trabajo colaborativo',
+      ],
+      contacto: {
+        nombre: 'Dr. Roberto Sánchez',
+        telefono: '+52 55 1234 5678',
+        email: 'contacto@ini.edu.mx',
+        sitioWeb: 'www.ini.edu.mx',
+      },
+    },
+    {
+      id: 2,
+      titulo: 'Asistente de Marketing Digital',
+      institucion: 'Universidad Autónoma de México',
+      categoria: 'Marketing',
+      ubicacion: 'Ciudad de México',
+      modalidad: 'Remota',
+      horario: 'Flexible, 15 hrs/semana',
+      fechaInicio: '1 de julio, 2023',
+      duracion: '4 meses',
+      plazas: 3,
+      descripcion:
+        'La Universidad Autónoma de México busca estudiantes interesados en marketing digital para colaborar en campañas en redes sociales y creación de contenido...',
+      requisitos: [
+        'Estudiante de Marketing, Comunicación o afines',
+        'Conocimientos básicos de herramientas de diseño y gestión de redes sociales',
+        'Disponibilidad de 15 horas semanales',
+        'Creatividad e interés por el marketing digital',
+      ],
+      actividades: [
+        'Desarrollo de contenido para redes sociales',
+        'Análisis de estadísticas de campañas',
+        'Apoyo en la creación de estrategias de marketing',
+        'Gestión de comunidades en línea',
+      ],
+      beneficios: [
+        'Carta de liberación de servicio social',
+        'Experiencia en marketing digital',
+        'Oportunidad de crecimiento profesional',
+        'Ambiente de trabajo dinámico y creativo',
+      ],
+      contacto: {
+        nombre: 'Lic. Mariana Pérez',
+        telefono: '+52 55 9876 5432',
+        email: 'contacto@unam.edu.mx',
+        sitioWeb: 'www.unam.mx',
+      },
+    },
+    {
+      id: 3,
+      titulo: 'Asistente de Desarrollo de Software',
+      institucion: 'Tecnológico de Monterrey',
+      categoria: 'Tecnologías de la Información',
+      ubicacion: 'Monterrey, Nuevo León',
+      modalidad: 'Presencial',
+      horario: 'De lunes a viernes, 10 hrs/semana',
+      fechaInicio: '15 de junio, 2023',
+      duracion: '6 meses',
+      plazas: 2,
+      descripcion:
+        'El Tecnológico de Monterrey está en busca de estudiantes para apoyar en el desarrollo de software en proyectos internos, trabajando con diversas tecnologías...',
+      requisitos: [
+        'Estudiante de Ingeniería en Sistemas, Computación o afines',
+        'Conocimientos básicos de programación en Python, Java o JavaScript',
+        'Disponibilidad de 10 horas semanales',
+        'Interés por el desarrollo de software y la tecnología',
+      ],
+      actividades: [
+        'Desarrollo y mantenimiento de aplicaciones internas',
+        'Pruebas de software y detección de errores',
+        'Documentación técnica de los proyectos',
+        'Colaboración en equipos ágiles de desarrollo',
+      ],
+      beneficios: [
+        'Carta de liberación de servicio social',
+        'Oportunidades de aprender nuevas tecnologías',
+        'Acceso a eventos y conferencias tecnológicas',
+        'Ambiente de trabajo colaborativo y profesional',
+      ],
+      contacto: {
+        nombre: 'Ing. Andrés García',
+        telefono: '+52 81 2345 6789',
+        email: 'contacto@itesm.mx',
+        sitioWeb: 'www.itesm.mx',
+      },
+    },
+    
+  ];
+  
