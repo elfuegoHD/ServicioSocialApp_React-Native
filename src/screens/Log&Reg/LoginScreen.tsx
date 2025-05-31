@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,19 +9,19 @@ import {
   Switch,
   Alert,
   Platform,
-} from "react-native"
-import { EyeIcon, EyeOffIcon } from "lucide-react-native"
-import { useNavigation } from "@react-navigation/native"
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import { globalStyles } from "../../styles/globalStyles"
-import { HeaderSection } from "../Home/Sections"
+} from "react-native";
+import { EyeIcon, EyeOffIcon } from "lucide-react-native";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { globalStyles } from "../../styles/globalStyles";
+import { HeaderSection } from "../Home/Sections";
 
 type RootStackParamList = {
-  RegisterScreen: undefined
   Dashboard: undefined
+  RegisterScreen: undefined
 }
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const PasswordInput = ({
   value,
@@ -30,11 +30,11 @@ const PasswordInput = ({
   setShowPassword,
   darkMode,
 }: {
-  value: string
-  onChangeText: (text: string) => void
-  showPassword: boolean
-  setShowPassword: (show: boolean) => void
-  darkMode: boolean
+  value: string;
+  onChangeText: (text: string) => void;
+  showPassword: boolean;
+  setShowPassword: (show: boolean) => void;
+  darkMode: boolean;
 }) => (
   <View style={globalStyles.inputGroup}>
     <Text style={[globalStyles.label, { color: darkMode ? "#fff" : "#000" }]}>Contraseña</Text>
@@ -66,18 +66,18 @@ const PasswordInput = ({
       </Pressable>
     </View>
   </View>
-)
+);
 
 const LoginScreen = () => {
-  const navigation = useNavigation<NavigationProp>()
-  const systemTheme = useColorScheme()
-  const [darkMode, setDarkMode] = useState(systemTheme === "dark")
-  const [showPassword, setShowPassword] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const navigation = useNavigation<NavigationProp>();
+  const systemTheme = useColorScheme();
+  const [darkMode, setDarkMode] = useState(systemTheme === "dark");
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const toggleDarkMode = () => setDarkMode(!darkMode)
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const handleLogin = () => {
     if (!email || !password) {
@@ -88,10 +88,10 @@ const LoginScreen = () => {
       }
       return;
     }
-  
+
     navigation.navigate("Dashboard");
-  }
-  
+  };
+
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 24 }}
@@ -162,7 +162,6 @@ const LoginScreen = () => {
           <Text style={globalStyles.loginButtonText}>Iniciar Sesión</Text>
         </Pressable>
 
-
         {/* Registro */}
         <Text style={{ textAlign: "center", marginTop: 16, color: darkMode ? "#cbd5e1" : "#6b7280" }}>
           ¿No tienes una cuenta?{" "}
@@ -174,7 +173,7 @@ const LoginScreen = () => {
         </Text>
       </View>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default LoginScreen
+export default LoginScreen;

@@ -8,6 +8,11 @@ export const globalStyles = StyleSheet.create({
     top: 40,
     right: 20,
     zIndex: 10,
+  },container: {
+    flex: 1,
+    padding: 24,
+    justifyContent: 'center',
+    backgroundColor: '#f9f9f9',
   },
   iconButton: {
     backgroundColor: "#e5e7eb",
@@ -204,6 +209,36 @@ export const globalStyles = StyleSheet.create({
     },
     labelDark: {
       color: "#fff",
-    }
+    },
+    
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  
+  toggleText: {
+    color: '#007bff',
+    textAlign: 'right',
+    marginBottom: 16,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  checkboxLabel: {
+    fontSize: 16,
+  },
+  button: {
+    marginBottom: 16,
+    paddingVertical: 8,
+  },
+  registerText: {
+    color: '#007bff',
+    textAlign: 'center',
+  },
+
    
 })
