@@ -1,179 +1,207 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  useColorScheme,
-  ScrollView,
-  Switch,
-  Alert,
-  Platform,
-} from "react-native";
-import { EyeIcon, EyeOffIcon } from "lucide-react-native";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Appearance } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import axios from '../../axiosConfig';
 import { globalStyles } from "../../styles/globalStyles";
-import { HeaderSection } from "../Home/Sections";
+import { useNavigation } from "@react-navigation/native"
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
+
 
 type RootStackParamList = {
   Dashboard: undefined
   RegisterScreen: undefined
 }
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 
-const PasswordInput = ({
-  value,
-  onChangeText,
-  showPassword,
-  setShowPassword,
-  darkMode,
-}: {
-  value: string;
-  onChangeText: (text: string) => void;
-  showPassword: boolean;
-  setShowPassword: (show: boolean) => void;
-  darkMode: boolean;
-}) => (
-  <View style={globalStyles.inputGroup}>
-    <Text style={[globalStyles.label, { color: darkMode ? "#fff" : "#000" }]}>Contraseña</Text>
-    <View style={globalStyles.passwordContainer}>
-      <TextInput
-        placeholder="••••••••"
-        secureTextEntry={!showPassword}
-        value={value}
-        onChangeText={onChangeText}
-        placeholderTextColor={darkMode ? "#9ca3af" : "#6b7280"}
-        style={[
-          globalStyles.input,
-          {
-            flex: 1,
-            backgroundColor: darkMode ? "#374151" : "#f9fafb",
-            color: darkMode ? "#fff" : "#000",
-          },
-        ]}
-        autoCapitalize="none"
-        autoCorrect={false}
-        textContentType="password"
-      />
-      <Pressable onPress={() => setShowPassword(!showPassword)} style={globalStyles.eyeIcon}>
-        {showPassword ? (
-          <EyeOffIcon size={18} color={darkMode ? "#cbd5e1" : "#6b7280"} />
-        ) : (
-          <EyeIcon size={18} color={darkMode ? "#cbd5e1" : "#6b7280"} />
-        )}
-      </Pressable>
-    </View>
-  </View>
-);
 
-const LoginScreen = () => {
-  const navigation = useNavigation<NavigationProp>();
-  const systemTheme = useColorScheme();
-  const [darkMode, setDarkMode] = useState(systemTheme === "dark");
+export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigation = useNavigation<NavigationProp>()
+  const [darkMode, setDarkMode] = useState(Appearance.getColorScheme() === 'dark');
+  const [formData, setFormData] = useState({
+    correo: "",
+    contrasena: "",
+    recuerdame: false
+  });
 
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+  // Escuchar cambios en el esquema de color del sistema
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(({ colorScheme }) => {
+      setDarkMode(colorScheme === 'dark');
+    });
+    return () => subscription.remove();
+  }, []);
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      if (Platform.OS === "web") {
-        window.alert("Por favor, completa todos los campos.");
-      } else {
-        Alert.alert("Campos vacíos", "Por favor, completa todos los campos.");
+  const handleChange = (name: string, value: string | boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === "recuerdame" ? !formData.recuerdame : value,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('/login', formData);
+      
+      if (response.status === 200) {
+        localStorage.setItem("user_id", response.data.id);
+        localStorage.setItem("user_tipo", response.data.tipo);
+        
+        if (response.data.tipo === 2) {
+          alert("Bienvenido, administrador,Prox. Semestre");
+        } else if (response.data.tipo === 1) {
+          navigation.navigate("Dashboard");
+        }
       }
-      return;
+    } catch (error) {
+      alert(error.response?.data?.mensaje || "Error al iniciar sesión");
+      console.log(error);
     }
+  };
 
-    navigation.navigate("Dashboard");
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
   };
 
   return (
-    <ScrollView
-      contentContainerStyle={{ flexGrow: 1, justifyContent: "center", padding: 24 }}
-      style={{ backgroundColor: darkMode ? "#111827" : "#f9fafb" }}
-    >
-      <HeaderSection darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <View
-        style={[
-          globalStyles.card,
-          {
-            backgroundColor: darkMode ? "#1f2937" : "#fff",
-            borderColor: darkMode ? "#374151" : "#e5e7eb",
-          },
-        ]}
+    <ScrollView contentContainerStyle={[
+      globalStyles.container, 
+      darkMode && globalStyles.darkContainer
+    ]}>
+      <TouchableOpacity 
+        style={globalStyles.toggleContainer}
+        onPress={toggleDarkMode}
       >
-        <Text style={[globalStyles.cardTitle, { color: darkMode ? "#fff" : "#000" }]}>Iniciar Sesión</Text>
-        <Text style={[globalStyles.cardSubtitle, { color: darkMode ? "#cbd5e1" : "#6b7280" }]}>
+        <View style={globalStyles.iconButton}>
+          <Ionicons 
+            name={darkMode ? 'moon-outline' : 'sunny-outline'} 
+            size={20} 
+            color={darkMode ? 'white' : 'black'} 
+          />
+        </View>
+      </TouchableOpacity>
+
+      <View style={[
+        globalStyles.card, 
+        darkMode && globalStyles.darkCard,
+        { marginHorizontal: 24, maxWidth: 400, width: '100%', alignSelf: 'center' }
+      ]}>
+        <Text style={[
+          globalStyles.cardTitle, 
+          darkMode && globalStyles.darkTitle
+        ]}>
+          Iniciar Sesión
+        </Text>
+        <Text style={[
+          globalStyles.cardSubtitle,
+          darkMode && globalStyles.labelDark
+        ]}>
           Ingresa tus credenciales para acceder a tu cuenta
         </Text>
 
-        {/* Email */}
         <View style={globalStyles.inputGroup}>
-          <Text style={[globalStyles.label, { color: darkMode ? "#fff" : "#000" }]}>Correo Electrónico</Text>
+          <Text style={[
+            globalStyles.label, 
+            darkMode && globalStyles.labelDark
+          ]}>
+            Correo Electrónico
+          </Text>
           <TextInput
-            placeholder="tu@ejemplo.com"
-            keyboardType="email-address"
-            value={email}
-            onChangeText={setEmail}
-            placeholderTextColor={darkMode ? "#9ca3af" : "#6b7280"}
             style={[
               globalStyles.input,
-              {
-                backgroundColor: darkMode ? "#374151" : "#f9fafb",
-                color: darkMode ? "#fff" : "#000",
-              },
+              darkMode && globalStyles.inputDark
             ]}
+            placeholder="tu@ejemplo.com"
+            placeholderTextColor={darkMode ? '#9ca3af' : '#6b7280'}
+            keyboardType="email-address"
             autoCapitalize="none"
-            autoCorrect={false}
-            textContentType="emailAddress"
+            value={formData.correo as string}
+            onChangeText={(text) => handleChange('correo', text)}
           />
         </View>
 
-        {/* Password */}
-        <PasswordInput
-          value={password}
-          onChangeText={setPassword}
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-          darkMode={darkMode}
-        />
-
-        {/* Recordarme */}
-        <View style={globalStyles.row}>
-          <View style={globalStyles.rememberContainer}>
-            <Switch value={rememberMe} onValueChange={setRememberMe} />
-            <Text style={{ marginLeft: 8, color: darkMode ? "#e5e7eb" : "#000" }}>Recordarme</Text>
+        <View style={globalStyles.inputGroup}>
+          <Text style={[
+            globalStyles.label, 
+            darkMode && globalStyles.labelDark
+          ]}>
+            Contraseña
+          </Text>
+          <View style={globalStyles.passwordContainer}>
+            <TextInput
+              style={[
+                globalStyles.input,
+                darkMode && globalStyles.inputDark,
+                { flex: 1 }
+              ]}
+              placeholder="••••••••"
+              placeholderTextColor={darkMode ? '#9ca3af' : '#6b7280'}
+              secureTextEntry={!showPassword}
+              value={formData.contrasena as string}
+              onChangeText={(text) => handleChange('contrasena', text)}
+            
+            />
+            <TouchableOpacity 
+              style={globalStyles.eyeIcon}
+              onPress={() => setShowPassword(!showPassword)}
+            >
+              <Ionicons 
+                name={showPassword ? 'eye-off-outline' : 'eye-outline'} 
+                size={18} 
+                color={darkMode ? '#9ca3af' : '#6b7280'} 
+              />
+            </TouchableOpacity>
           </View>
         </View>
 
-        {/* Botón Iniciar Sesión */}
-        <Pressable
+        <View style={globalStyles.row}>
+          <View style={globalStyles.rememberContainer}>
+            <TouchableOpacity 
+              style={[
+                { width: 20, height: 20, borderRadius: 4, borderWidth: 1, marginRight: 8 },
+                darkMode ? { borderColor: '#d1d5db' } : { borderColor: '#6b7280' },
+                formData.recuerdame && { backgroundColor: '#2563eb', borderColor: '#2563eb' }
+              ]}
+              onPress={() => handleChange('recuerdame', !formData.recuerdame)}
+            >
+              {formData.recuerdame && (
+                <Ionicons name="checkmark" size={14} color="white" style={{ alignSelf: 'center' }} />
+              )}
+            </TouchableOpacity>
+            <Text style={[
+              globalStyles.label,
+              darkMode && globalStyles.labelDark
+            ]}>
+              Recordarme
+            </Text>
+          </View>
+        </View>
+
+        <TouchableOpacity 
           style={[
             globalStyles.loginButton,
-            { backgroundColor: darkMode ? "#1d4ed8" : "#2563eb" },
-          ]}
-          onPress={handleLogin}
+            { backgroundColor: '#2563eb' }
+          ]} 
+          onPress={handleSubmit}
         >
           <Text style={globalStyles.loginButtonText}>Iniciar Sesión</Text>
-        </Pressable>
+        </TouchableOpacity>
 
-        {/* Registro */}
-        <Text style={{ textAlign: "center", marginTop: 16, color: darkMode ? "#cbd5e1" : "#6b7280" }}>
-          ¿No tienes una cuenta?{" "}
-          <Pressable onPress={() => navigation.navigate("RegisterScreen")}>
-            <Text style={{ color: darkMode ? "#60a5fa" : "#2563eb", fontWeight: "bold" }}>
-              Regístrate
-            </Text>
-          </Pressable>
+        <Text style={[
+          globalStyles.cardSubtitle,
+          darkMode && globalStyles.labelDark,
+          { marginTop: 16 }
+        ]}>
+          ¿No tienes una cuenta?{' '}
+          <Text 
+            style={{ color: '#2563eb', fontWeight: '600' }}
+            onPress={() => window.location.href = "/auth/register"}
+          >
+            Regístrate
+          </Text>
         </Text>
       </View>
     </ScrollView>
   );
-};
-
-export default LoginScreen;
+}

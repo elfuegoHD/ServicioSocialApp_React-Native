@@ -14,6 +14,16 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#f9f9f9',
   },
+  darkContainer: {
+    backgroundColor: '#111827',
+  },
+  darkCard: {
+    backgroundColor: '#1f2937',
+  },
+  darkTitle: {
+    color: 'white',
+  },
+  // ... otros estilos para dark mode
   iconButton: {
     backgroundColor: "#e5e7eb",
     padding: 10,
@@ -239,6 +249,7 @@ export const globalStyles = StyleSheet.create({
     color: '#007bff',
     textAlign: 'center',
   },
-
+  
+  
    
 })
