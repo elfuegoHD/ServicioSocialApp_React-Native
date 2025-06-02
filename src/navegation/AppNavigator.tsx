@@ -27,12 +27,11 @@ export default function AppNavigator() {
       <Stack.Navigator 
         id="Home"
         screenOptions={{ headerShown: false }}  // Ocultar header en todas las pantallas
-        initialRouteName="Home"  // Ruta inicial al cargar la app
       >
         {/* Definición de las pantallas */}
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="oportunidadScreen" component={OportunidadScreen} />
       </Stack.Navigator>

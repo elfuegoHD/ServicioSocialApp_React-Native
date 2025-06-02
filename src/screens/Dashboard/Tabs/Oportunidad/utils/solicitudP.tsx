@@ -1,4 +1,4 @@
-import axios from '../../../../axiosConfig'
+import axios from '../../../../../axiosConfig'
 
 export const enviarSolicitud = async () => {
   try {

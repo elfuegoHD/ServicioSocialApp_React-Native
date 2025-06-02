@@ -47,6 +47,8 @@ export default function LoginPage() {
       if (response.status === 200) {
         localStorage.setItem("user_id", response.data.id);
         localStorage.setItem("user_tipo", response.data.tipo);
+        localStorage.setItem("token", response.data.token);
+
         
         if (response.data.tipo === 2) {
           alert("Bienvenido, administrador,Prox. Semestre");

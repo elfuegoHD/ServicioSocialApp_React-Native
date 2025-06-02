@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-import { MapPin, Clock, Calendar, Users, Bookmark, Share2 } from 'lucide-react-native' 
-import axios from '../../../../axiosConfig'
-import { DashStyle } from '../../../../styles/DashboardStyle'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { MapPin, Clock, Calendar, Users} from 'lucide-react-native' 
+import axios from '../../../../../axiosConfig'
+import { DashStyle } from '../../../../../styles/DashboardStyle'
 import { enviarSolicitud } from './solicitudP'
 
 interface ProcesoPostulacionProps {

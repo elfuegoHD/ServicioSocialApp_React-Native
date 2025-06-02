@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { View, Text, ScrollView, Pressable } from "react-native"
+import { View, Text, ScrollView, Pressable, ActivityIndicator } from "react-native"
 import axios from "../../../../axiosConfig"
 import { MapPin, Clock } from "lucide-react-native"
-import { lightStyles, darkStyles } from "./oportunidadesStyle"
+import { lightStyles, darkStyles } from "./utils/oportunidadesStyle"
 import { useNavigation } from "@react-navigation/native"
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
 
@@ -30,6 +30,7 @@ export const OportunidadesTab: React.FC<OportunidadesTabProps> = ({ darkMode }) 
   const styles = darkMode ? darkStyles : lightStyles
 
   const [programas, setProgramas] = useState<Programa[]>([])
+  const [loading, setLoading] = useState(true)
   const navigation = useNavigation<NavigationProp>()
 
   const handleVerDetalles = (id: number) => {
@@ -46,11 +47,23 @@ export const OportunidadesTab: React.FC<OportunidadesTabProps> = ({ darkMode }) 
       .catch((error) => {
         console.error("Error al obtener programas:", error)
       })
+      .finally(() => {
+        setLoading(false)
+      })
   }, [])
 
+  if (loading) {
+    return (
+      <View style={[styles.container, { flex: 1, justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color="#3B82F6" />
+      </View>
+    )
+  }
+
   return (
-    <ScrollView style={styles.container} >
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Oportunidades Recomendadas</Text>
+      
       <View style={styles.cardGrid}>
         {programas.map((programa) => (
           <View key={programa.idprograma} style={styles.card}>

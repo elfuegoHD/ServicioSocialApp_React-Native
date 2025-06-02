@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Modal, Pressable } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Modal, Pressable, ActivityIndicator } from "react-native";
 import axios from "../../../axiosConfig";
 import { CheckCircle, Clock as ClockIcon, AlertCircle, FileText } from "lucide-react-native";
 import { DashStyle } from '../../../styles/DashboardStyle';
+
 
 interface ApplicationProps {
   title: string;
@@ -165,7 +166,8 @@ const PostulacionesTab: React.FC<PostulacionesProps> = ({ darkMode }) => {
 
         <View style={styles.applicationsList}>
           {applications.length === 0 ? (
-            <Text>No hay postulaciones disponibles.</Text>
+            <ActivityIndicator size="large"/>
+
           ) : (
             applications.map(app => (
               <ApplicationCard

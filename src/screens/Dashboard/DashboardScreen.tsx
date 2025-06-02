@@ -13,12 +13,6 @@ import {
   BookOpen, 
   MapPin, 
   Clock, 
-  User, 
-  LogOut, 
-  Menu, 
-  X, 
-  Moon, 
-  Sun 
 } from "lucide-react-native";
 import { DashStyle } from '../../styles/DashboardStyle'; 
 import ProfileTab from './Tabs/perfilTab';
@@ -26,6 +20,7 @@ import PostulacionesTab from './Tabs/postulacionesTab';
 import { OportunidadesTab } from './Tabs/Oportunidad/oportunidadesTab';
 import { FooterSection } from "../Home/Sections";
 import { useNavigation } from "@react-navigation/native";
+import DashboardHeader from "../utils/DashboardHeader";
 
 type RootStackParamList = {Home: undefined; Dashboard: undefined; };
 type NavigationProp = import("@react-navigation/native-stack").NativeStackNavigationProp<RootStackParamList>;
@@ -51,70 +46,12 @@ const DashboardScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerContent}>
-          <View style={styles.headerLeft}>
-          <TouchableOpacity 
-            onPress={() => navigation.navigate("Dashboard")} // Actualmente va a "dashboard", lo cambiarás
-          >
-            <Text style={styles.logo}>ServicioSocial</Text>
-          </TouchableOpacity>
-          </View>
-
-          {isMobile ? (
-            <View style={styles.mobileHeaderRight}>
-              <TouchableOpacity onPress={toggleDarkMode} style={styles.iconButton}>
-                {darkMode ? <Sun color={styles.icon.color} size={20} /> : <Moon color={styles.icon.color} size={20} />}
-              </TouchableOpacity>
-              <TouchableOpacity 
-                onPress={() => setMobileMenuOpen(!mobileMenuOpen)} 
-                style={styles.menuButton}
-              >
-                {mobileMenuOpen ? <X color={styles.icon.color} size={24} /> : <Menu color={styles.icon.color} size={24} />}
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <View style={styles.headerRight}>
-              <TouchableOpacity onPress={toggleDarkMode} style={styles.iconButton}>
-                {darkMode ? <Sun color={styles.icon.color} size={20} /> : <Moon color={styles.icon.color} size={20} />}
-              </TouchableOpacity>
-
-              <View style={styles.userInfo}>
-                <View style={styles.userAvatar}>
-                  <User color={styles.userIcon.color} size={18} />
-                </View>
-                <Text style={styles.userName}>Juan Pérez</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("Home")} // Redirigir a HomeScreen
-                style={styles.logoutButton}
-              >
-                <LogOut color={styles.icon.color} size={18} />
-                <Text style={styles.logoutText}>Salir</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-      </View>
-
-      {/* Mobile Menu */}
-      {isMobile && mobileMenuOpen && (
-        <View style={styles.mobileMenu}>
-          <View style={styles.mobileUserInfo}>
-            <View style={styles.mobileUserAvatar}>
-              <User color={styles.userIcon.color} size={18} />
-            </View>
-            <Text style={styles.mobileUserName}>Juan Pérez</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Home")}
-            style={styles.mobileMenuItem}>
-            <LogOut color={styles.icon.color} size={18} />
-            <Text style={styles.mobileMenuText}>Cerrar Sesión</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <DashboardHeader
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
 
       {/* Main Content */}
       <ScrollView style={styles.mainContent}>
