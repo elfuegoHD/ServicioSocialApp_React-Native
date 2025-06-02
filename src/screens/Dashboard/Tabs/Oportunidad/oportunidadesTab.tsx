@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { View, Text, ScrollView, Pressable, ActivityIndicator } from "react-native"
+import { View, Text, ScrollView, Pressable, ActivityIndicator,TextInput,TouchableOpacity } from "react-native"
 import axios from "../../../../axiosConfig"
-import { MapPin, Clock } from "lucide-react-native"
+import { Search,BookOpen,MapPin,Clock} from "lucide-react-native"
 import { lightStyles, darkStyles } from "./utils/oportunidadesStyle"
 import { useNavigation } from "@react-navigation/native"
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
+import { DashStyle } from '../../../../styles/DashboardStyle';
+
 
 type RootStackParamList = {
   oportunidadScreen: { idPrograma: number }
@@ -28,6 +30,7 @@ interface OportunidadesTabProps {
 
 export const OportunidadesTab: React.FC<OportunidadesTabProps> = ({ darkMode }) => {
   const styles = darkMode ? darkStyles : lightStyles
+  const styles2= DashStyle(darkMode)
 
   const [programas, setProgramas] = useState<Programa[]>([])
   const [loading, setLoading] = useState(true)
@@ -62,6 +65,31 @@ export const OportunidadesTab: React.FC<OportunidadesTabProps> = ({ darkMode }) 
 
   return (
     <ScrollView style={styles.container}>
+      {/* Search Bar */}
+                        <View style={styles2.searchContainer}>
+                          <View style={styles2.searchInputContainer}>
+                            <Search color={styles2.icon.color} size={20} />
+                            <TextInput
+                              placeholder="Buscar oportunidades..."
+                              placeholderTextColor={styles2.placeholder.color}
+                              style={styles2.searchInput}
+                            />
+                          </View>
+                          <View style={styles2.filterButtons}>
+                            <TouchableOpacity style={styles2.filterButton}>
+                              <BookOpen color={styles2.icon.color} size={16} />
+                              <Text style={styles2.filterButtonText}>Área</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles2.filterButton}>
+                              <MapPin color={styles2.icon.color} size={16} />
+                              <Text style={styles2.filterButtonText}>Ubicación</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles2.filterButton}>
+                              <Clock color={styles2.icon.color} size={16} />
+                              <Text style={styles2.filterButtonText}>Horario</Text>
+                            </TouchableOpacity>
+                          </View>
+                        </View>
       <Text style={styles.title}>Oportunidades Recomendadas</Text>
       
       <View style={styles.cardGrid}>

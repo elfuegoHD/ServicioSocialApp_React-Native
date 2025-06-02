@@ -1055,7 +1055,7 @@ export const DashStyle = (darkMode) => StyleSheet.create({
   },
   closeButton: {
     marginTop: 20,
-    backgroundColor: darkMode ? '#10B981' : '#10B981',
+    backgroundColor: darkMode ? '#0862B6' : '#0862B6',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',

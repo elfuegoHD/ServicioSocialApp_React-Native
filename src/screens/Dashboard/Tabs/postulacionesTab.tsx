@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Modal, Pressable, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Modal, Pressable, ActivityIndicator,  } from "react-native";
 import axios from "../../../axiosConfig";
-import { CheckCircle, Clock as ClockIcon, AlertCircle, FileText } from "lucide-react-native";
+import { CheckCircle, Clock as ClockIcon, AlertCircle, FileText} from "lucide-react-native";
 import { DashStyle } from '../../../styles/DashboardStyle';
 
 
@@ -49,9 +49,7 @@ const ApplicationCard: React.FC<ApplicationProps> = ({
             <FileText color={styles.icon.color} size={16} />
             <Text style={styles.detailsButtonText}>Ver Detalles</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.cancelButton}>
-            <Text style={styles.cancelButtonText}>Cancelar</Text>
-          </TouchableOpacity>
+         
         </>
       )
     },
@@ -77,6 +75,7 @@ const ApplicationCard: React.FC<ApplicationProps> = ({
   }[status];
 
   return (
+    
     <View style={styles.applicationCard}>
       <View style={styles.applicationContent}>
         <View style={styles.applicationHeader}>
@@ -162,6 +161,7 @@ const PostulacionesTab: React.FC<PostulacionesProps> = ({ darkMode }) => {
   return (
     <>
       <ScrollView style={styles.tabContent}>
+        
         <Text style={styles.sectionTitle}>Mis Postulaciones</Text>
 
         <View style={styles.applicationsList}>

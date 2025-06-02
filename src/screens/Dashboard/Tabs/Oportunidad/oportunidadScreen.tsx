@@ -6,7 +6,7 @@ import {
   Appearance
 } from 'react-native';
 import { DashStyle } from '../../../../styles/DashboardStyle'; 
-import { ProcesoPostulacion } from './ProcesoPostulacion';
+import { ProcesoPostulacion } from './utils/ProcesoPostulacion';
 import DetallePrograma from './utils/DetallePrograma';
 import DashboardHeader from '../../../utils/DashboardHeader';
 
