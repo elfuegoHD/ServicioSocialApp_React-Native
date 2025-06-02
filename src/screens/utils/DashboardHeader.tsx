@@ -100,11 +100,19 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             <Text style={styles.mobileUserName}>{userName}</Text>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Home")}
-            style={styles.mobileMenuItem}>
-            <LogOut color={styles.icon.color} size={18} />
-            <Text style={styles.mobileMenuText}>Cerrar Sesión</Text>
-          </TouchableOpacity>
+  onPress={() => {
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('token');
+    localStorage.removeItem('idProgramaSeleccionado');
+    localStorage.removeItem('user_tipo')
+    navigation.navigate("Home");
+  }}
+  style={styles.logoutButton}
+>
+  <LogOut color={styles.icon.color} size={18} />
+  <Text style={styles.logoutText}>Salir</Text>
+</TouchableOpacity>
+
         </View>
       )}
     </View>
