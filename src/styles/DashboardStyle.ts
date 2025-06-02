@@ -197,16 +197,6 @@ export const DashStyle = (darkMode) => StyleSheet.create({
       flexWrap: 'wrap',
       gap: 8,
     },
-    filterButton: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 4,
-      borderWidth: 1,
-      borderColor: darkMode ? '#374151' : '#E5E7EB',
-      borderRadius: 6,
-      paddingVertical: 6,
-      paddingHorizontal: 12,
-    },
     filterButtonText: {
       color: darkMode ? '#D1D5DB' : '#6B7280',
       fontSize: 14,
@@ -1031,6 +1021,62 @@ export const DashStyle = (darkMode) => StyleSheet.create({
     paddingVertical: 10,
     alignItems: 'center',
   },
+ modalOverlay: {
+    flex: 1,
+    backgroundColor: darkMode ? 'rgba(0,0,0,0.8)' : 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    backgroundColor: darkMode ? '#1f2937' : 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    shadowColor: darkMode ? '#000' : '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: darkMode ? 0.8 : 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: darkMode ? 'white' : 'black',
+    marginBottom: 10,
+  },
+  modalSubtitle: {
+    fontSize: 16,
+    color: darkMode ? '#ccc' : '#555',
+    marginBottom: 10,
+  },
+  modalText: {
+    color: darkMode ? '#ddd' : '#333',
+    marginBottom: 5,
+  },
+  closeButton: {
+    marginTop: 20,
+    backgroundColor: darkMode ? '#10B981' : '#10B981',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  closeButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+filterButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+      borderWidth: 1,
+      borderColor: darkMode ? '#374151' : '#E5E7EB',
+      borderRadius: 6,
+      paddingVertical: 6,
+      paddingHorizontal: 12,
+    },
+filterButtonActive: {
+      backgroundColor: darkMode ? '#374151' : '#E5E7EB',
+    }
 
   });
   

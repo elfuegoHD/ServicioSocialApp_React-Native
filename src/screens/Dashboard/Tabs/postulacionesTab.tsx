@@ -1,5 +1,6 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, ScrollView, Modal, Pressable } from "react-native";
+import axios from "../../../axiosConfig";
 import { CheckCircle, Clock as ClockIcon, AlertCircle, FileText } from "lucide-react-native";
 import { DashStyle } from '../../../styles/DashboardStyle';
 
@@ -8,15 +9,19 @@ interface ApplicationProps {
   subtitle: string;
   status: 'accepted' | 'pending' | 'rejected';
   date: string;
+  details: ApplicationData; // Datos completos para el modal
+  onViewDetails: (details: ApplicationData) => void;
   styles: any;
 }
 
-const ApplicationCard: React.FC<ApplicationProps> = ({ 
-  title, 
-  subtitle, 
-  status, 
-  date, 
-  styles 
+const ApplicationCard: React.FC<ApplicationProps> = ({
+  title,
+  subtitle,
+  status,
+  date,
+  details,
+  onViewDetails,
+  styles
 }) => {
   const statusConfig = {
     accepted: {
@@ -24,7 +29,7 @@ const ApplicationCard: React.FC<ApplicationProps> = ({
       icon: <CheckCircle color="#10B981" size={16} />,
       actions: (
         <>
-          <TouchableOpacity style={styles.detailsButton}>
+          <TouchableOpacity style={styles.detailsButton} onPress={() => onViewDetails(details)}>
             <FileText color={styles.icon.color} size={16} />
             <Text style={styles.detailsButtonText}>Ver Detalles</Text>
           </TouchableOpacity>
@@ -39,7 +44,7 @@ const ApplicationCard: React.FC<ApplicationProps> = ({
       icon: <ClockIcon color="#F59E0B" size={16} />,
       actions: (
         <>
-          <TouchableOpacity style={styles.detailsButton}>
+          <TouchableOpacity style={styles.detailsButton} onPress={() => onViewDetails(details)}>
             <FileText color={styles.icon.color} size={16} />
             <Text style={styles.detailsButtonText}>Ver Detalles</Text>
           </TouchableOpacity>
@@ -54,7 +59,7 @@ const ApplicationCard: React.FC<ApplicationProps> = ({
       icon: <AlertCircle color="#EF4444" size={16} />,
       actions: (
         <>
-          <TouchableOpacity style={styles.detailsButton}>
+          <TouchableOpacity style={styles.detailsButton} onPress={() => onViewDetails(details)}>
             <FileText color={styles.icon.color} size={16} />
             <Text style={styles.detailsButtonText}>Ver Detalles</Text>
           </TouchableOpacity>
@@ -96,50 +101,119 @@ interface PostulacionesProps {
   darkMode: boolean;
 }
 
+interface ApplicationData {
+  id: number;
+  titulo: string;
+  institucion: string;
+  estatus: 'accepted' | 'pending' | 'rejected';
+  fechaPostulacion: string;
+  descripcion: string;
+  fechafin: string;
+  fechainicio: string;
+  correo: string;
+}
+
 const PostulacionesTab: React.FC<PostulacionesProps> = ({ darkMode }) => {
   const styles = DashStyle(darkMode);
+  const [applications, setApplications] = useState<ApplicationData[]>([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedApplication, setSelectedApplication] = useState<ApplicationData | null>(null);
 
-  const applications = [
-    {
-      id: '1',
-      title: 'Asistente de Investigación',
-      subtitle: 'Instituto Nacional de Investigación',
-      status: 'accepted' as const,
-      date: 'Postulado el 15 de marzo, 2023'
-    },
-    {
-      id: '2',
-      title: 'Desarrollo Web',
-      subtitle: 'Secretaría de Educación Pública',
-      status: 'pending' as const,
-      date: 'Postulado el 10 de abril, 2023'
-    },
-    {
-      id: '3',
-      title: 'Apoyo Administrativo',
-      subtitle: 'Instituto Mexicano del Seguro Social',
-      status: 'rejected' as const,
-      date: 'Postulado el 5 de febrero, 2023'
-    }
-  ];
+  useEffect(() => {
+    const fetchApplications = async () => {
+      try {
+        const userId = localStorage.getItem('user_id');
+        if (!userId) {
+          console.warn('Usuario no identificado');
+          setApplications([]);
+          return;
+        }
+
+        const response = await axios.get(`/solicitudes/estudiante/${userId}`);
+        const dataArray = JSON.parse(response.data);
+
+        const data = dataArray.map((app: any) => ({
+          id: app.idsolicitud,
+          titulo: app.titulo,
+          institucion: app.razonsocial,
+          estatus: app.estatus === 1 ? 'pending' : app.estatus === 2 ? 'accepted' : 'rejected',
+          fechaPostulacion: new Date(app.fechasolicitud).toLocaleDateString(),
+          descripcion: app.descripcion,
+          fechafin: new Date(app.fechafin).toLocaleDateString(),
+          fechainicio: new Date(app.fechainicio).toLocaleDateString(),
+          correo: app.correo,
+        }));
+
+        setApplications(data);
+      } catch (error) {
+        console.error("Error al cargar postulaciones:", error);
+      }
+    };
+
+    fetchApplications();
+  }, []);
+
+  const handleViewDetails = (application: ApplicationData) => {
+    setSelectedApplication(application);
+    setModalVisible(true);
+  };
 
   return (
-    <View style={styles.tabContent}>
-      <Text style={styles.sectionTitle}>Mis Postulaciones</Text>
+    <>
+      <ScrollView style={styles.tabContent}>
+        <Text style={styles.sectionTitle}>Mis Postulaciones</Text>
 
-      <View style={styles.applicationsList}>
-        {applications.map(app => (
-          <ApplicationCard
-            key={app.id}
-            title={app.title}
-            subtitle={app.subtitle}
-            status={app.status}
-            date={app.date}
-            styles={styles}
-          />
-        ))}
-      </View>
-    </View>
+        <View style={styles.applicationsList}>
+          {applications.length === 0 ? (
+            <Text>No hay postulaciones disponibles.</Text>
+          ) : (
+            applications.map(app => (
+              <ApplicationCard
+                key={app.id}
+                title={app.titulo}
+                subtitle={app.institucion}
+                status={app.estatus}
+                date={app.fechaPostulacion}
+                details={app}
+                onViewDetails={handleViewDetails}
+                styles={styles}
+              />
+            ))
+          )}
+        </View>
+      </ScrollView>
+
+      {/* Modal para detalles */}
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            {selectedApplication && (
+              <>
+                <Text style={styles.modalTitle}>{selectedApplication.titulo}</Text>
+                <Text style={styles.modalSubtitle}>{selectedApplication.institucion}</Text>
+                <Text style={styles.modalText}><Text style={{fontWeight:'bold'}}>Descripción:</Text> {selectedApplication.descripcion}</Text>
+                <Text style={styles.modalText}><Text style={{fontWeight:'bold'}}>Inicio:</Text> {selectedApplication.fechainicio}</Text>
+                <Text style={styles.modalText}><Text style={{fontWeight:'bold'}}>Fin:</Text> {selectedApplication.fechafin}</Text>
+                <Text style={styles.modalText}><Text style={{fontWeight:'bold'}}>Correo de contacto:</Text> {selectedApplication.correo}</Text>
+
+                <Pressable
+                  style={styles.closeButton}
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Text style={styles.closeButtonText}>Cerrar</Text>
+                </Pressable>
+              </>
+            )}
+          </View>
+        </View>
+</Modal>
+
+    </>
   );
 };
 
