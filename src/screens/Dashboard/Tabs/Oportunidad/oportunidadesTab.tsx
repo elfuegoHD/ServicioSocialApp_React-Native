@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, ScrollView, Pressable, ActivityIndicator,TextInput,TouchableOpacity } from "react-native"
 import axios from "../../../../axiosConfig"
-import { Search,BookOpen,MapPin,Clock} from "lucide-react-native"
+import { Search,BookOpen,MapPin,Clock,Building} from "lucide-react-native"
 import { lightStyles, darkStyles } from "./utils/oportunidadesStyle"
 import { useNavigation } from "@react-navigation/native"
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
@@ -85,8 +85,8 @@ export const OportunidadesTab: React.FC<OportunidadesTabProps> = ({ darkMode }) 
                               <Text style={styles2.filterButtonText}>Ubicación</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles2.filterButton}>
-                              <Clock color={styles2.icon.color} size={16} />
-                              <Text style={styles2.filterButtonText}>Horario</Text>
+                              <Building color={styles2.icon.color} size={16} />
+                              <Text style={styles2.filterButtonText}>RazonSocial</Text>
                             </TouchableOpacity>
                           </View>
                         </View>
