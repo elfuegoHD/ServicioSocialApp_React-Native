@@ -13,7 +13,7 @@ type RootStackParamList = {
   RegisterScreen: undefined;  // Pantalla de Registro sin parámetros
   Home: undefined;  
   Dashboard: undefined; 
-  OportunidadScreen: {id: string};  // Pantalla de Oportunidad sin parámetros
+  oportunidadScreen: {id: string};  // Pantalla de Oportunidad sin parámetros
 
 };
 
@@ -34,7 +34,7 @@ export default function AppNavigator() {
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="OportunidadScreen" component={OportunidadScreen} />
+        <Stack.Screen name="oportunidadScreen" component={OportunidadScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,119 +1,92 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { MapPin, Clock } from "lucide-react-native";
-import { DashStyle } from '../../../../styles/DashboardStyle';
-import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react"
+import { View, Text, ScrollView, Pressable } from "react-native"
+import axios from "../../../../axiosConfig"
+import { MapPin, Clock } from "lucide-react-native"
+import { lightStyles, darkStyles } from "./oportunidadesStyle"
+import { useNavigation } from "@react-navigation/native"
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
 
-type RootStackParamList = { OportunidadScreen: { id: number } };  
-type NavigationProp = import("@react-navigation/native-stack").NativeStackNavigationProp<RootStackParamList>;
-
-interface OpportunityProps {
-  darkMode: boolean;
+type RootStackParamList = {
+  oportunidadScreen: { idPrograma: number }
 }
 
-const OpportunityCard = ({
-  title,
-  subtitle,
-  location,
-  schedule,
-  description,
-  badgeType,
-  styles,
-  id 
-}: {
-  title: string;
-  subtitle: string;
-  location: string;
-  schedule: string;
-  description: string;
-  badgeType: 'engineering' | 'technology' | 'admin';
-  styles: any;
-  id: number; 
-}) => {
-  const badgeStyles = {
-    engineering: styles.engineeringBadge,
-    technology: styles.technologyBadge,
-    admin: styles.adminBadge
-  };
-  
-  const navigation = useNavigation<NavigationProp>();
-  
-  return (
-    <View style={styles.card}>
-      <View style={styles.cardHeader}>
-        <Text style={styles.cardTitle}>{title}</Text>
-        <View style={[styles.badge, badgeStyles[badgeType]]}>
-          <Text style={styles.badgeText}>
-            {badgeType === 'engineering' ? 'Ingeniería' : 
-             badgeType === 'technology' ? 'Tecnología' : 'Administración'}
-          </Text>
-        </View>
-      </View>
-      <Text style={styles.cardSubtitle}>{subtitle}</Text>
-      <View style={styles.cardDetails}>
-        <View style={styles.detailItem}>
-          <MapPin color={styles.detailIcon.color} size={16} />
-          <Text style={styles.detailText}>{location}</Text>
-        </View>
-        <View style={styles.detailItem}>
-          <Clock color={styles.detailIcon.color} size={16} />
-          <Text style={styles.detailText}>{schedule}</Text>
-        </View>
-      </View>
-      <Text style={styles.cardDescription}>{description}</Text>
-      <TouchableOpacity 
-        style={styles.cardButton}
-        onPress={() => navigation.navigate("OportunidadScreen", { id })}>  
-        <Text style={styles.cardButtonText}>Ver Detalles</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 
-const OpportunitiesTab: React.FC<OpportunityProps> = ({ darkMode }) => {
-  const styles = DashStyle(darkMode);
+type Programa = {
+  idprograma: number
+  titulo: string
+  descripcion: string
+  validohasta: string
+  ubicacion: string
+  cupo: number
+  dependencia: string
+}
+
+interface OportunidadesTabProps {
+  darkMode: boolean
+}
+
+export const OportunidadesTab: React.FC<OportunidadesTabProps> = ({ darkMode }) => {
+  const styles = darkMode ? darkStyles : lightStyles
+
+  const [programas, setProgramas] = useState<Programa[]>([])
+  const navigation = useNavigation<NavigationProp>()
+
+  const handleVerDetalles = (id: number) => {
+    localStorage.setItem("idProgramaSeleccionado", id.toString())
+    navigation.navigate("oportunidadScreen", { idPrograma: id })
+  }
+
+  useEffect(() => {
+    axios.get("/programas/")
+      .then((res) => {
+        const parsedData = typeof res.data === "string" ? JSON.parse(res.data) : res.data
+        setProgramas(parsedData)
+      })
+      .catch((error) => {
+        console.error("Error al obtener programas:", error)
+      })
+  }, [])
 
   return (
-    <View style={styles.tabContent}>
-      <Text style={styles.sectionTitle}>Oportunidades Recomendadas</Text>
-
-      <View style={styles.opportunitiesGrid}>
-        {/* Ahora pasamos el id en cada OpportunityCard */}
-        <OpportunityCard
-          id={1}  // Cambiamos el valor a un número
-          title="Asistente de Investigación"
-          subtitle="Instituto Nacional de Investigación"
-          location="Ciudad de México"
-          schedule="Horario Flexible, 20 hrs/semana"
-          description="Apoya en proyectos de investigación en el área de ingeniería de materiales."
-          badgeType="engineering"
-          styles={styles}
-        />
-
-        <OpportunityCard
-          id={2}  // Cambiamos el valor a un número
-          title="Desarrollo Web"
-          subtitle="Secretaría de Educación Pública"
-          location="Remoto"
-          schedule="Matutino, 15 hrs/semana"
-          description="Colabora en el desarrollo de plataformas educativas para escuelas públicas."
-          badgeType="technology"
-          styles={styles}
-        />
-
-        <OpportunityCard
-          id={3}  // Cambiamos el valor a un número
-          title="Apoyo Administrativo"
-          subtitle="Instituto Mexicano del Seguro Social"
-          location="Guadalajara"
-          schedule="Vespertino, 25 hrs/semana"
-          description="Apoya en la gestión de expedientes y atención a derechohabientes."
-          badgeType="admin"
-          styles={styles}
-        />
+    <ScrollView style={styles.container} >
+      <Text style={styles.title}>Oportunidades Recomendadas</Text>
+      <View style={styles.cardGrid}>
+        {programas.map((programa) => (
+          <View key={programa.idprograma} style={styles.card}>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardTitle}>{programa.titulo}</Text>
+              <Text style={styles.badge}>{programa.dependencia}</Text>
+              <Text style={styles.cardDescription}>Cupo: {programa.cupo}</Text>
+            </View>
+            <View style={styles.cardContent}>
+              <View style={styles.infoRow}>
+                <MapPin size={16} color={darkMode ? '#aaa' : '#888'} style={styles.icon} />
+                <Text style={styles.infoText}>{programa.ubicacion}</Text>
+              </View>
+              <View style={styles.infoRow}>
+                <Clock size={16} color={darkMode ? '#aaa' : '#888'} style={styles.icon} />
+                <Text style={styles.infoText}>
+                  Válido hasta: {new Date(programa.validohasta).toLocaleDateString()}
+                </Text>
+              </View>
+              <Text style={styles.descripcion}>{programa.descripcion}</Text>
+              <Pressable
+                style={({ pressed }) => [
+                  styles.button,
+                  {
+                    opacity: pressed ? 0.7 : 1,
+                    backgroundColor: darkMode ? '#1e40af' : '#1e40af'
+                  }
+                ]}
+                onPress={() => handleVerDetalles(programa.idprograma)}
+              >
+                <Text style={styles.buttonText}>Ver Detalles</Text>
+              </Pressable>
+            </View>
+          </View>
+        ))}
       </View>
-    </View>
-  );
-};
-
-export default OpportunitiesTab;
+    </ScrollView>
+  )
+}

@@ -23,7 +23,7 @@ import {
 import { DashStyle } from '../../styles/DashboardStyle'; 
 import ProfileTab from './Tabs/perfilTab';
 import PostulacionesTab from './Tabs/postulacionesTab';
-import OpportunitiesTab from './Tabs/Oportunidad/oportunidadesTab';
+import { OportunidadesTab } from './Tabs/Oportunidad/oportunidadesTab';
 import { FooterSection } from "../Home/Sections";
 import { useNavigation } from "@react-navigation/native";
 
@@ -170,7 +170,7 @@ const DashboardScreen = () => {
               </TouchableOpacity>
             </View>
 
-            {activeTab === "oportunidades" && <OpportunitiesTab darkMode={darkMode} />}
+            {activeTab === "oportunidades" && <OportunidadesTab darkMode={darkMode}  />}
             {activeTab === "postulaciones" && <PostulacionesTab darkMode={darkMode} />}
             {activeTab === "perfil" && <ProfileTab darkMode={darkMode} />}
           </View>

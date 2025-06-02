@@ -999,5 +999,38 @@ export const DashStyle = (darkMode) => StyleSheet.create({
       marginTop: 8,
       gap: 8,
     },
+   
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  
+
+  cardContent: {
+    padding: 16,
+  },
+  detailsContainer: {
+    marginBottom: 16,
+  },
+  detailRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+
+  descriptionText: {
+    fontSize: 14,
+    color: '#555',
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+  button: {
+    backgroundColor: '#2563EB',
+    borderRadius: 6,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+
   });
   
