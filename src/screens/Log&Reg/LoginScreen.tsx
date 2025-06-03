@@ -198,7 +198,7 @@ export default function LoginPage() {
           ¿No tienes una cuenta?{' '}
           <Text
             style={{ color: '#2563eb', fontWeight: '600' }}
-            onPress={() => window.location.href = "/auth/register"}
+            onPress={() => navigation.navigate('RegisterScreen')}
           >
             Regístrate
           </Text>

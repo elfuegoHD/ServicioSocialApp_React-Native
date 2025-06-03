@@ -59,7 +59,7 @@ const ProfileTab: React.FC<ProfileProps> = ({ darkMode }) => {
   }, []);
 
   const handleUpdate = async () => {
-    const idEstudiante = parseInt(localStorage.getItem("user_id") || "0");
+    const idEstudiante = parseInt(localStorage.getItem("user_id"));
 
     if (!idEstudiante) {
       console.error("ID de estudiante no disponible");
