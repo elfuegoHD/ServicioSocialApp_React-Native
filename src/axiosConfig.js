@@ -6,7 +6,6 @@ axios.defaults.withCredentials = true; // Incluir cookies globalmente
 export const obtenerCookie = (nombre) => {
     nombre = nombre.trim();
     if (!document.cookie) {
-        
         return null; // Si no hay cookies disponibles
     }
     const cookieres= document.cookie;
