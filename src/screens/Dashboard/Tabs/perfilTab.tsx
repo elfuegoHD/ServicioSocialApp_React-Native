@@ -59,42 +59,47 @@ const ProfileTab: React.FC<ProfileProps> = ({ darkMode }) => {
   }, []);
 
   const handleUpdate = async () => {
-    const idEstudiante = parseInt(localStorage.getItem("user_id") || "0");
+  const idEstudiante = parseInt(localStorage.getItem("user_id") || "0");
 
-    if (!idEstudiante) {
-      console.error("ID de estudiante no disponible");
-      return;
-    }
+  if (!idEstudiante || !estudiante) {
+    alert("ID del estudiante no disponible.");
+    return;
+  }
 
-    try {
-      await axios.put(
-        "/estudiantes/",
-        {
-          idEstudiante,
-          nombre: formData.nombre,
-          apellidoP: formData.apellidop,
-          apellidoM: formData.apellidom,
-          escuela: formData.escuela,
-          nivel: formData.nivel,
-          estado: formData.estado,
-          municipio: formData.municipio,
-          correo: formData.correo,
-          curp: formData.curp,
-          contrasena: formData.contrasena,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-
-      setModalVisible(false);
-      window.alert("Perfil actualizado correctamente");
-      setLoading(true);
-      await fetchEstudiante();
-    } catch (error) {
-      console.error("Error al actualizar el perfil:", error);
-    }
+  const payload = {
+    idEstudiante,
+    nombre: formData.nombre || estudiante.nombre,
+    apellidoP: formData.apellidop || estudiante.apellidop,
+    apellidoM: formData.apellidom || estudiante.apellidom,
+    escuela: formData.escuela || estudiante.escuela,
+    nivel: formData.nivel || estudiante.nivel,
+    estado: formData.estado || estudiante.estado,
+    municipio: formData.municipio || estudiante.municipio,
+    correo: formData.correo || estudiante.correo,
+    curp: formData.curp || estudiante.curp,
+    contrasena: formData.contrasena || estudiante.contrasena,
   };
+
+  console.log("Payload enviado al backend:", payload);
+
+  try {
+    await axios.put("/estudiantes/", payload, {
+      withCredentials: true,
+    });
+
+    setModalVisible(false);
+    alert("Perfil actualizado correctamente");
+    setLoading(true);
+    await fetchEstudiante();
+  } catch (error: any) {
+    console.error("Error al actualizar el perfil:", error);
+    alert(
+      "Error al actualizar: " +
+        (error.response?.data?.error || error.message || "Error desconocido")
+    );
+  }
+};
+
 
   if (loading) {
     return (
