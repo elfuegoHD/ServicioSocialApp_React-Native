@@ -15,7 +15,7 @@ export const enviarSolicitud = async () => {
       idEstudiante: parseInt(estudianteId)
     };
 
-    const response = await axios.post('http://localhost:3010/solicitudes', payload, {
+    const response = await axios.post('/solicitudes', payload, {
       withCredentials: true
     });
 

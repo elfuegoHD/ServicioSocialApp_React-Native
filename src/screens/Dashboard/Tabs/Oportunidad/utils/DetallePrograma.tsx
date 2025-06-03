@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { MapPin, Clock, Calendar, Users} from 'lucide-react-native' 
+import { MapPin, Clock, Calendar, Users } from 'lucide-react-native'
 import axios from '../../../../../axiosConfig'
 import { DashStyle } from '../../../../../styles/DashboardStyle'
 import { enviarSolicitud } from './solicitudP'
@@ -195,7 +195,7 @@ const DetallePrograma: React.FC<ProcesoPostulacionProps> = ({ darkMode }) => {
         gap: 8,
         marginBottom: 24,
         justifyContent: 'space-between'
-        
+
       }}>
         <TouchableOpacity
           onPress={enviarSolicitud}
@@ -214,7 +214,7 @@ const DetallePrograma: React.FC<ProcesoPostulacionProps> = ({ darkMode }) => {
 
       </View>
 
-     
+
 
     </View>
   )

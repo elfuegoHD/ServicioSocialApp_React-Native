@@ -8,7 +8,7 @@ export const globalStyles = StyleSheet.create({
     top: 40,
     right: 20,
     zIndex: 10,
-  },container: {
+  }, container: {
     flex: 1,
     padding: 24,
     justifyContent: 'center',
@@ -89,145 +89,145 @@ export const globalStyles = StyleSheet.create({
   },
   TitleText: {
     fontSize: 20,
-      fontWeight: "bold",
-      textAlign: "center",
-      marginBottom: 16
-   },
-   featureCard: {
-      padding: 16,
-      borderRadius: 12,
-      marginBottom: 16,
-      shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-    },
-    backGroundIcon: {
-        borderRadius: 9999,
-        padding: 8,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 40,
-        height: 40
-    },
-    
-    //Style for LoginScreen-------------
-    toggleContainer: {
-      position: "absolute",
-      top: 50,
-      right: 24,
-      zIndex: 10,
-    },
-    card: {
-      padding: 24,
-      borderRadius: 12,
-      borderWidth: 1,
-    },
-    cardTitle: {
-      fontSize: 24,
-      fontWeight: "bold",
-      textAlign: "center",
-      marginBottom: 8,
-    },
-    cardSubtitle: {
-      fontSize: 14,
-      textAlign: "center",
-      marginBottom: 24,
-    },
-    inputGroup: {
-      marginBottom: 16,
-    },
-    label: {
-      marginBottom: 4,
-      fontWeight: "500",
-    },
-    input: {
-      borderWidth: 1,
-      borderColor: "#9ca3af",
-      borderRadius: 8,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-    },
-    passwordContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    eyeIcon: {
-      position: "absolute",
-      right: 12,
-    },
-    row: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginVertical: 12,
-    },
-    rememberContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    loginButton: {
-      paddingVertical: 12,
-      borderRadius: 8,
-      alignItems: "center",
-      marginTop: 8,
-    },
-    loginButtonText: {
-      color: "#fff",
-      fontWeight: "600",
-      fontSize: 16,
-    },
-    //Style for RegisterScreen-------------
-    radioGroup: {
-      flexDirection: "row",
-      justifyContent: "center",
-      gap: 24,
-      marginBottom: 16,
-    },
-    radioItem: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: 8,
-    },
-    radioCircle: {
-      width: 16,
-      height: 16,
-      borderRadius: 8,
-      borderWidth: 2,
-      borderColor: "#6b7280",
-      marginRight: 4,
-    },
-    termsContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginTop: 8,
-    },
-    registerButton: {
-      marginTop: 16,
-      paddingVertical: 12,
-      borderRadius: 8,
-      alignItems: "center",
-    },
-    registerButtonText: {
-      color: "#fff",
-      fontWeight: "600",
-      fontSize: 16,
-    },
-    inputDark: {
-      backgroundColor: "#1f2937", // dark gray
-      borderColor: "#374151",
-      color: "#fff",
-    },
-    labelDark: {
-      color: "#fff",
-    },
-    
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 16
+  },
+  featureCard: {
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  backGroundIcon: {
+    borderRadius: 9999,
+    padding: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40
+  },
+
+  //Style for LoginScreen-------------
+  toggleContainer: {
+    position: "absolute",
+    top: 50,
+    right: 24,
+    zIndex: 10,
+  },
+  card: {
+    padding: 24,
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  cardTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 8,
+  },
+  cardSubtitle: {
+    fontSize: 14,
+    textAlign: "center",
+    marginBottom: 24,
+  },
+  inputGroup: {
+    marginBottom: 16,
+  },
+  label: {
+    marginBottom: 4,
+    fontWeight: "500",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#9ca3af",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 12,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: 12,
+  },
+  rememberContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  loginButton: {
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: "center",
+    marginTop: 8,
+  },
+  loginButtonText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 16,
+  },
+  //Style for RegisterScreen-------------
+  radioGroup: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 24,
+    marginBottom: 16,
+  },
+  radioItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  radioCircle: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: "#6b7280",
+    marginRight: 4,
+  },
+  termsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 8,
+  },
+  registerButton: {
+    marginTop: 16,
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  registerButtonText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 16,
+  },
+  inputDark: {
+    backgroundColor: "#1f2937", // dark gray
+    borderColor: "#374151",
+    color: "#fff",
+  },
+  labelDark: {
+    color: "#fff",
+  },
+
   title: {
     fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 24,
     textAlign: 'center',
   },
-  
+
   toggleText: {
     color: '#007bff',
     textAlign: 'right',
@@ -249,7 +249,7 @@ export const globalStyles = StyleSheet.create({
     color: '#007bff',
     textAlign: 'center',
   },
-  
-  
-   
+
+
+
 })

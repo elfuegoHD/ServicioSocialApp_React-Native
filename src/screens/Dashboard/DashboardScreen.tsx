@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { 
-  View, 
-  Text, 
-  ScrollView, 
-  TouchableOpacity, 
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
   useWindowDimensions,
   Appearance
 } from "react-native";
-import { DashStyle } from '../../styles/DashboardStyle'; 
+import { DashStyle } from '../../styles/DashboardStyle';
 import ProfileTab from './Tabs/perfilTab';
 import PostulacionesTab from './Tabs/postulacionesTab';
 import { OportunidadesTab } from './Tabs/Oportunidad/oportunidadesTab';
@@ -48,19 +48,19 @@ const DashboardScreen = () => {
           {/* Dashboard Tabs */}
           <View style={styles.tabsContainer}>
             <View style={styles.tabsList}>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={[styles.tabTrigger, activeTab === "oportunidades" && styles.activeTab]}
                 onPress={() => setActiveTab("oportunidades")}
               >
                 <Text style={styles.tabText}>Oportunidades</Text>
               </TouchableOpacity>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={[styles.tabTrigger, activeTab === "postulaciones" && styles.activeTab]}
                 onPress={() => setActiveTab("postulaciones")}
               >
                 <Text style={styles.tabText}>Mis Postulaciones</Text>
               </TouchableOpacity>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={[styles.tabTrigger, activeTab === "perfil" && styles.activeTab]}
                 onPress={() => setActiveTab("perfil")}
               >
@@ -68,7 +68,7 @@ const DashboardScreen = () => {
               </TouchableOpacity>
             </View>
 
-            {activeTab === "oportunidades" && <OportunidadesTab darkMode={darkMode}  />}
+            {activeTab === "oportunidades" && <OportunidadesTab darkMode={darkMode} />}
             {activeTab === "postulaciones" && <PostulacionesTab darkMode={darkMode} />}
             {activeTab === "perfil" && <ProfileTab darkMode={darkMode} />}
           </View>

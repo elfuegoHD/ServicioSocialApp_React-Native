@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Search, Clock, MapPin, BookOpen,Moon,Sun } from "lucide-react-native";
+import { Search, Clock, MapPin, BookOpen, Moon, Sun } from "lucide-react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import { FeatureCard, FilterBox, Card } from "./Components";
 
@@ -20,7 +20,7 @@ export const HeaderSection = ({ darkMode, toggleDarkMode }: { darkMode: boolean;
 export const HeroSection = ({ darkMode }: { darkMode: boolean }) => {
   const navigation = useNavigation<NavigationProp>();
 
-  return ( 
+  return (
     //Header de la sección principal
     <View style={[globalStyles.hero, { backgroundColor: darkMode ? "#1e3a8a" : "#2563eb" }]}>
       <Text style={[globalStyles.heroTitle, { color: "#fff" }]}>Encuentra tu Servicio Social Ideal</Text>
@@ -47,40 +47,40 @@ export const HeroSection = ({ darkMode }: { darkMode: boolean }) => {
 
 // Sección de búsqueda de oportunidades de servicio social
 export const SearchSection = ({ darkMode }: { darkMode: boolean }) => (
-    <View style={{ padding: 20 }}>
-      <Card
-        style={{
-          backgroundColor: darkMode ? "#1e293b" : "#f9fafb"
-        }}
-      >
-        <Text style={[globalStyles.TitleText, { color: darkMode ? "#fff" : "#000" }]}>
-          Busca Oportunidades de Servicio Social
-        </Text>
-        <View style={globalStyles.filterRow}>
-        <FilterBox 
-            icon={<BookOpen color={darkMode ? "#60a5fa" : "#2563eb"} />} 
-            label="Área de Estudio" 
-            darkMode={darkMode}
+  <View style={{ padding: 20 }}>
+    <Card
+      style={{
+        backgroundColor: darkMode ? "#1e293b" : "#f9fafb"
+      }}
+    >
+      <Text style={[globalStyles.TitleText, { color: darkMode ? "#fff" : "#000" }]}>
+        Busca Oportunidades de Servicio Social
+      </Text>
+      <View style={globalStyles.filterRow}>
+        <FilterBox
+          icon={<BookOpen color={darkMode ? "#60a5fa" : "#2563eb"} />}
+          label="Área de Estudio"
+          darkMode={darkMode}
         />
-        <FilterBox 
-            icon={<MapPin color={darkMode ? "#60a5fa" : "#2563eb"} />} 
-            label="Ubicación" 
-            darkMode={darkMode}
+        <FilterBox
+          icon={<MapPin color={darkMode ? "#60a5fa" : "#2563eb"} />}
+          label="Ubicación"
+          darkMode={darkMode}
         />
-        <FilterBox 
-        icon={<Clock color={darkMode ? "#60a5fa" : "#2563eb"} />} 
-        label="Horario" 
-        darkMode={darkMode} 
+        <FilterBox
+          icon={<Clock color={darkMode ? "#60a5fa" : "#2563eb"} />}
+          label="Horario"
+          darkMode={darkMode}
         />
 
-        </View>
-        <Pressable style={[globalStyles.searchButton, darkMode && { backgroundColor: "#1d4ed8" }]}>
-          <Search size={16} color="#fff" style={{ marginRight: 8 }} />
-          <Text style={{ color: "#fff", fontWeight: "600" }}>Buscar Oportunidades</Text>
-        </Pressable>
-      </Card>
-    </View>
-  );
+      </View>
+      <Pressable style={[globalStyles.searchButton, darkMode && { backgroundColor: "#1d4ed8" }]}>
+        <Search size={16} color="#fff" style={{ marginRight: 8 }} />
+        <Text style={{ color: "#fff", fontWeight: "600" }}>Buscar Oportunidades</Text>
+      </Pressable>
+    </Card>
+  </View>
+);
 
 // Sección de características de la plataforma
 export const FeaturesSection = ({ darkMode }: { darkMode: boolean }) => (
@@ -90,7 +90,7 @@ export const FeaturesSection = ({ darkMode }: { darkMode: boolean }) => (
     </Text>
     <FeatureCard // buscador de oportunidades
       icon={ // icono de búsqueda
-        <View style={[globalStyles.backGroundIcon,{backgroundColor: darkMode ? "#1e40af20" : "#e0f2fe",}]}>
+        <View style={[globalStyles.backGroundIcon, { backgroundColor: darkMode ? "#1e40af20" : "#e0f2fe", }]}>
           <Search size={24} color={darkMode ? "#60a5fa" : "#2563eb"} />
         </View>
       }
@@ -101,8 +101,8 @@ export const FeaturesSection = ({ darkMode }: { darkMode: boolean }) => (
     />
     <FeatureCard // mapa de oportunidades
       icon={ // icono de mapa
-        <View style={[globalStyles.backGroundIcon,{backgroundColor: darkMode ? "#1e40af20" : "#e0f2fe",}]}>
-            <Clock size={24} color={darkMode ? "#60a5fa" : "#2563eb"} />
+        <View style={[globalStyles.backGroundIcon, { backgroundColor: darkMode ? "#1e40af20" : "#e0f2fe", }]}>
+          <Clock size={24} color={darkMode ? "#60a5fa" : "#2563eb"} />
         </View>}
       title="Ahorro de Tiempo"
       description="Accede a toda la información actualizada en un solo lugar."
@@ -110,11 +110,11 @@ export const FeaturesSection = ({ darkMode }: { darkMode: boolean }) => (
     />
     <FeatureCard // oportunidades de desarrollo profesional
       icon={
-        <View style={[globalStyles.backGroundIcon,{backgroundColor: darkMode ? "#1e40af20" : "#e0f2fe",}]}>
-            <BookOpen size={24} color={darkMode ? "#60a5fa" : "#2563eb"} />
+        <View style={[globalStyles.backGroundIcon, { backgroundColor: darkMode ? "#1e40af20" : "#e0f2fe", }]}>
+          <BookOpen size={24} color={darkMode ? "#60a5fa" : "#2563eb"} />
         </View>
-            }
-        
+      }
+
       title="Desarrollo Profesional"
       description="Encuentra oportunidades que complementen tu formación."
       darkMode={darkMode}

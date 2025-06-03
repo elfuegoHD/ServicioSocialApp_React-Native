@@ -6,7 +6,7 @@ const HomeScreen = () => {
   const systemTheme = useColorScheme();
   const [darkMode, setDarkMode] = useState(systemTheme === "dark");
   const toggleDarkMode = () => setDarkMode(prev => !prev);
- 
+
 
   return (
     <ScrollView
@@ -20,7 +20,7 @@ const HomeScreen = () => {
       <SearchSection darkMode={darkMode} /> {/* Sección de búsqueda con filtros */}
 
       <FeaturesSection darkMode={darkMode} /> {/* Sección de características con tarjetas */}
-      
+
       <FooterSection /> {/* Sección de pie de página con información adicional */}
     </ScrollView>
   );

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  ScrollView, 
+import {
+  View,
+  Text,
+  ScrollView,
   Appearance
 } from 'react-native';
-import { DashStyle } from '../../../../styles/DashboardStyle'; 
+import { DashStyle } from '../../../../styles/DashboardStyle';
 import { ProcesoPostulacion } from './utils/ProcesoPostulacion';
 import DetallePrograma from './utils/DetallePrograma';
 import DashboardHeader from '../../../utils/DashboardHeader';
@@ -33,7 +33,7 @@ const OportunidadScreen = () => {
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />
-      
+
       {/* Main Content */}
       <ScrollView style={styles.mainContent}>
         <View style={styles.contentContainer}>

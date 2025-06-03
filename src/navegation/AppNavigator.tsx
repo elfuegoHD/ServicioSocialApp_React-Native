@@ -11,9 +11,9 @@ import OportunidadScreen from "../screens/Dashboard/Tabs/Oportunidad/oportunidad
 type RootStackParamList = {
   LoginScreen: undefined;  // Pantalla de Login sin parámetros
   RegisterScreen: undefined;  // Pantalla de Registro sin parámetros
-  Home: undefined;  
-  Dashboard: undefined; 
-  oportunidadScreen: {id: string};  // Pantalla de Oportunidad sin parámetros
+  Home: undefined;
+  Dashboard: undefined;
+  oportunidadScreen: { id: string };  // Pantalla de Oportunidad sin parámetros
 
 };
 
@@ -23,8 +23,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 // Componente principal de navegación
 export default function AppNavigator() {
   return (
-    <NavigationContainer> 
-      <Stack.Navigator 
+    <NavigationContainer>
+      <Stack.Navigator
         id="Home"
         screenOptions={{ headerShown: false }}  // Ocultar header en todas las pantallas
       >

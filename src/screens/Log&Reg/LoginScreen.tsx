@@ -43,13 +43,13 @@ export default function LoginPage() {
   const handleSubmit = async () => {
     try {
       const response = await axios.post('/login', formData);
-      
+
       if (response.status === 200) {
         localStorage.setItem("user_id", response.data.id);
         localStorage.setItem("user_tipo", response.data.tipo);
         localStorage.setItem("token", response.data.token);
 
-        
+
         if (response.data.tipo === 2) {
           alert("Bienvenido, administrador,Prox. Semestre");
         } else if (response.data.tipo === 1) {
@@ -68,29 +68,29 @@ export default function LoginPage() {
 
   return (
     <ScrollView contentContainerStyle={[
-      globalStyles.container, 
+      globalStyles.container,
       darkMode && globalStyles.darkContainer
     ]}>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={globalStyles.toggleContainer}
         onPress={toggleDarkMode}
       >
         <View style={globalStyles.iconButton}>
-          <Ionicons 
-            name={darkMode ? 'moon-outline' : 'sunny-outline'} 
-            size={20} 
-            color={darkMode ? 'white' : 'black'} 
+          <Ionicons
+            name={darkMode ? 'moon-outline' : 'sunny-outline'}
+            size={20}
+            color={darkMode ? 'white' : 'black'}
           />
         </View>
       </TouchableOpacity>
 
       <View style={[
-        globalStyles.card, 
+        globalStyles.card,
         darkMode && globalStyles.darkCard,
         { marginHorizontal: 24, maxWidth: 400, width: '100%', alignSelf: 'center' }
       ]}>
         <Text style={[
-          globalStyles.cardTitle, 
+          globalStyles.cardTitle,
           darkMode && globalStyles.darkTitle
         ]}>
           Iniciar Sesión
@@ -104,7 +104,7 @@ export default function LoginPage() {
 
         <View style={globalStyles.inputGroup}>
           <Text style={[
-            globalStyles.label, 
+            globalStyles.label,
             darkMode && globalStyles.labelDark
           ]}>
             Correo Electrónico
@@ -125,7 +125,7 @@ export default function LoginPage() {
 
         <View style={globalStyles.inputGroup}>
           <Text style={[
-            globalStyles.label, 
+            globalStyles.label,
             darkMode && globalStyles.labelDark
           ]}>
             Contraseña
@@ -142,16 +142,16 @@ export default function LoginPage() {
               secureTextEntry={!showPassword}
               value={formData.contrasena as string}
               onChangeText={(text) => handleChange('contrasena', text)}
-            
+
             />
-            <TouchableOpacity 
+            <TouchableOpacity
               style={globalStyles.eyeIcon}
               onPress={() => setShowPassword(!showPassword)}
             >
-              <Ionicons 
-                name={showPassword ? 'eye-off-outline' : 'eye-outline'} 
-                size={18} 
-                color={darkMode ? '#9ca3af' : '#6b7280'} 
+              <Ionicons
+                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                size={18}
+                color={darkMode ? '#9ca3af' : '#6b7280'}
               />
             </TouchableOpacity>
           </View>
@@ -159,7 +159,7 @@ export default function LoginPage() {
 
         <View style={globalStyles.row}>
           <View style={globalStyles.rememberContainer}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={[
                 { width: 20, height: 20, borderRadius: 4, borderWidth: 1, marginRight: 8 },
                 darkMode ? { borderColor: '#d1d5db' } : { borderColor: '#6b7280' },
@@ -180,11 +180,11 @@ export default function LoginPage() {
           </View>
         </View>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={[
             globalStyles.loginButton,
             { backgroundColor: '#2563eb' }
-          ]} 
+          ]}
           onPress={handleSubmit}
         >
           <Text style={globalStyles.loginButtonText}>Iniciar Sesión</Text>
@@ -196,7 +196,7 @@ export default function LoginPage() {
           { marginTop: 16 }
         ]}>
           ¿No tienes una cuenta?{' '}
-          <Text 
+          <Text
             style={{ color: '#2563eb', fontWeight: '600' }}
             onPress={() => window.location.href = "/auth/register"}
           >

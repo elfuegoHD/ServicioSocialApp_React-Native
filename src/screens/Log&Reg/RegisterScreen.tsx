@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { Card } from "react-native-paper";
-import { Moon,Sun } from "lucide-react-native";
+import { Moon, Sun } from "lucide-react-native";
 import axios from "../../axiosConfig";
 import estados from "../../estados-municipios.json";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -28,7 +28,7 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-   const navigation = useNavigation<NavigationProp>()
+  const navigation = useNavigation<NavigationProp>()
   const [userType, setUserType] = useState("estudiante");
   const [darkMode, setDarkMode] = useState(false);
   const [estadosh, setEstadosh] = useState([]);
@@ -73,8 +73,8 @@ const RegisterPage = () => {
         const response = await axios.post("/estudiantes", formData);
         if (response.status === 200) {
           Alert.alert("Éxito", "Registro exitoso");
-         window.alert("Éxito: Registro exitoso");
-         navigation.navigate("LoginScreen");
+          window.alert("Éxito: Registro exitoso");
+          navigation.navigate("LoginScreen");
         }
       } catch (error) {
         Alert.alert("Error", error.response?.data?.mensaje || "Ocurrió un error");
@@ -231,7 +231,7 @@ const RegisterPage = () => {
     gridItemOneThird: {
       width: "30%",
     },
-   
+
   });
 
   return (
@@ -285,7 +285,7 @@ const RegisterPage = () => {
                 placeholder="Juan"
                 value={formData.nombre}
                 onChangeText={(text) => handleChange("nombre", text)}
-                 placeholderTextColor="#BABBBE"
+                placeholderTextColor="#BABBBE"
               />
             </View>
 
@@ -297,7 +297,7 @@ const RegisterPage = () => {
                 value={formData.apellidop}
                 onChangeText={(text) => handleChange("apellidop", text)}
                 placeholderTextColor="#BABBBE"
-               
+
               />
             </View>
 
@@ -309,7 +309,7 @@ const RegisterPage = () => {
                 value={formData.apellidom}
                 onChangeText={(text) => handleChange("apellidom", text)}
                 placeholderTextColor="#BABBBE"
-             
+
               />
             </View>
           </View>
@@ -322,7 +322,7 @@ const RegisterPage = () => {
             value={formData.correo}
             onChangeText={(text) => handleChange("correo", text)}
             placeholderTextColor="#BABBBE"
-            
+
           />
 
           {userType === "estudiante" && (
@@ -334,8 +334,8 @@ const RegisterPage = () => {
                 maxLength={18}
                 value={formData.curp}
                 onChangeText={(text) => handleChange("curp", text)}
-                 placeholderTextColor="#BABBBE"
-              
+                placeholderTextColor="#BABBBE"
+
               />
               <Text style={[styles.description, { fontSize: 12, marginBottom: 16 }]}>
                 Clave Única de Registro de Población (18 caracteres)
@@ -347,8 +347,8 @@ const RegisterPage = () => {
                 placeholder="Universidad Nacional Autónoma de México"
                 value={formData.escuela}
                 onChangeText={(text) => handleChange("escuela", text)}
-                 placeholderTextColor="#BABBBE"
-               
+                placeholderTextColor="#BABBBE"
+
               />
 
               <Text style={styles.label}>Nivel Educativo</Text>
@@ -406,7 +406,7 @@ const RegisterPage = () => {
                 value={formData.razonsocial}
                 onChangeText={(text) => handleChange("razonsocial", text)}
                 placeholderTextColor="#BABBBE"
-                
+
               />
 
               <View style={styles.grid}>
@@ -447,7 +447,7 @@ const RegisterPage = () => {
                 value={formData.ciudad}
                 onChangeText={(text) => handleChange("ciudad", text)}
                 placeholderTextColor="#BABBBE"
-               
+
               />
 
               <View style={styles.grid}>
@@ -459,7 +459,7 @@ const RegisterPage = () => {
                     value={formData.calle}
                     onChangeText={(text) => handleChange("calle", text)}
                     placeholderTextColor="#BABBBE"
-                   
+
                   />
                 </View>
 
@@ -471,7 +471,7 @@ const RegisterPage = () => {
                     value={formData.numeroext}
                     onChangeText={(text) => handleChange("numeroext", text)}
                     placeholderTextColor="#BABBBE"
-                   
+
                   />
                 </View>
               </View>
@@ -500,7 +500,7 @@ const RegisterPage = () => {
               value={formData.contrasena}
               onChangeText={(text) => handleChange("contrasena", text)}
               placeholderTextColor="#BABBBE"
-              
+
             />
             <TouchableOpacity
               style={styles.eyeButton}
@@ -517,7 +517,7 @@ const RegisterPage = () => {
           <View style={styles.checkboxContainer}>
             <Switch
               value={true}
-              onValueChange={() => {}}
+              onValueChange={() => { }}
               style={styles.checkbox}
               trackColor={{ false: "#767577", true: "#3b82f6" }}
               thumbColor="#ffffff"
@@ -526,7 +526,7 @@ const RegisterPage = () => {
               Acepto los{" "}
               <Text
                 style={styles.loginLink}
-                /*onPress={() => navigation.navigate("Terms")}*/
+              /*onPress={() => navigation.navigate("Terms")}*/
               >
                 términos y condiciones
               </Text>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Modal, Pressable, ActivityIndicator,  } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Modal, Pressable, ActivityIndicator, } from "react-native";
 import axios from "../../../axiosConfig";
-import { CheckCircle, Clock as ClockIcon, AlertCircle, FileText} from "lucide-react-native";
+import { CheckCircle, Clock as ClockIcon, AlertCircle, FileText } from "lucide-react-native";
 import { DashStyle } from '../../../styles/DashboardStyle';
 
 
@@ -49,7 +49,7 @@ const ApplicationCard: React.FC<ApplicationProps> = ({
             <FileText color={styles.icon.color} size={16} />
             <Text style={styles.detailsButtonText}>Ver Detalles</Text>
           </TouchableOpacity>
-         
+
         </>
       )
     },
@@ -75,7 +75,7 @@ const ApplicationCard: React.FC<ApplicationProps> = ({
   }[status];
 
   return (
-    
+
     <View style={styles.applicationCard}>
       <View style={styles.applicationContent}>
         <View style={styles.applicationHeader}>
@@ -161,12 +161,12 @@ const PostulacionesTab: React.FC<PostulacionesProps> = ({ darkMode }) => {
   return (
     <>
       <ScrollView style={styles.tabContent}>
-        
+
         <Text style={styles.sectionTitle}>Mis Postulaciones</Text>
 
         <View style={styles.applicationsList}>
           {applications.length === 0 ? (
-            <ActivityIndicator size="large"/>
+            <ActivityIndicator size="large" />
 
           ) : (
             applications.map(app => (
@@ -198,10 +198,10 @@ const PostulacionesTab: React.FC<PostulacionesProps> = ({ darkMode }) => {
               <>
                 <Text style={styles.modalTitle}>{selectedApplication.titulo}</Text>
                 <Text style={styles.modalSubtitle}>{selectedApplication.institucion}</Text>
-                <Text style={styles.modalText}><Text style={{fontWeight:'bold'}}>Descripción:</Text> {selectedApplication.descripcion}</Text>
-                <Text style={styles.modalText}><Text style={{fontWeight:'bold'}}>Inicio:</Text> {selectedApplication.fechainicio}</Text>
-                <Text style={styles.modalText}><Text style={{fontWeight:'bold'}}>Fin:</Text> {selectedApplication.fechafin}</Text>
-                <Text style={styles.modalText}><Text style={{fontWeight:'bold'}}>Correo de contacto:</Text> {selectedApplication.correo}</Text>
+                <Text style={styles.modalText}><Text style={{ fontWeight: 'bold' }}>Descripción:</Text> {selectedApplication.descripcion}</Text>
+                <Text style={styles.modalText}><Text style={{ fontWeight: 'bold' }}>Inicio:</Text> {selectedApplication.fechainicio}</Text>
+                <Text style={styles.modalText}><Text style={{ fontWeight: 'bold' }}>Fin:</Text> {selectedApplication.fechafin}</Text>
+                <Text style={styles.modalText}><Text style={{ fontWeight: 'bold' }}>Correo de contacto:</Text> {selectedApplication.correo}</Text>
 
                 <Pressable
                   style={styles.closeButton}
@@ -213,7 +213,7 @@ const PostulacionesTab: React.FC<PostulacionesProps> = ({ darkMode }) => {
             )}
           </View>
         </View>
-</Modal>
+      </Modal>
 
     </>
   );
