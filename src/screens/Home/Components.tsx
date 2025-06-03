@@ -1,10 +1,8 @@
 import React from "react";
-
 import { Text, View, StyleSheet } from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 
-export const FilterBox = ({ //Filtro de búsqueda
-  //define la estructura del filtro de búsqueda
+export const FilterBox = ({
   icon,
   label,
   darkMode,
@@ -19,7 +17,7 @@ export const FilterBox = ({ //Filtro de búsqueda
       {
         backgroundColor: darkMode ? "#404F5D" : "#fff",
         borderColor: darkMode ? "#374151" : "#B8C5DC",
-        borderWidth: 1
+        borderWidth: 1,
       },
     ]}
   >
@@ -28,19 +26,19 @@ export const FilterBox = ({ //Filtro de búsqueda
   </View>
 );
 
-export const FeatureCard = ({ //buscador de oportunidades
+export const FeatureCard = ({
   icon,
   title,
   description,
   darkMode,
-}: { //define la estructura de la tarjeta
+}: {
   icon: React.ReactNode;
   title: string;
   description: string;
   darkMode: boolean;
 }) => (
-  <View //define el estilo de la tarjeta
-    style={[globalStyles.featureCard, { backgroundColor: darkMode ? "#1e293b" : "#fff", }]}
+  <View
+    style={[globalStyles.featureCard, { backgroundColor: darkMode ? "#1e293b" : "#fff" }]}
   >
     <View style={{ alignSelf: "center", marginBottom: 8 }}>{icon}</View>
     <Text
@@ -52,9 +50,11 @@ export const FeatureCard = ({ //buscador de oportunidades
         marginBottom: 4,
       }}
     >
-      {title}{ }
+      {title}
     </Text>
-    <Text style={{ color: darkMode ? "#cbd5e1" : "#4b5563", textAlign: "center" }}>{description}</Text>
+    <Text style={{ color: darkMode ? "#cbd5e1" : "#4b5563", textAlign: "center" }}>
+      {description}
+    </Text>
   </View>
 );
 
