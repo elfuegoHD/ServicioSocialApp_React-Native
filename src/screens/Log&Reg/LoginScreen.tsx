@@ -157,7 +157,7 @@ export default function LoginPage() {
           </View>
         </View>
 
-        <View style={globalStyles.row}>
+        <View  style={globalStyles.row}>
           <View style={globalStyles.rememberContainer}>
             <TouchableOpacity
               style={[
@@ -175,7 +175,7 @@ export default function LoginPage() {
               globalStyles.label,
               darkMode && globalStyles.labelDark
             ]}>
-              Recordarme
+              
             </Text>
           </View>
         </View>
